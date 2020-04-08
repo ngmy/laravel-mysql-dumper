@@ -1,0 +1,58 @@
+{
+    "name": "ngmy/laravel-mysql-dumper",
+    "description": "The Laravel package that provides the Artisan command to execute mysqldump.",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Yuta Nagamiya",
+            "email": "y.nagamiya@gmail.com"
+        }
+    ],
+    "require": {
+        "php": "^7.2",
+        "ifsnop/mysqldump-php": "^2.0",
+        "illuminate/support": "5.5.*|5.6.*|5.7.*|5.8.*|^6.0|^7.0"
+    },
+    "require-dev": {
+        "nunomaduro/larastan": "^0.5.4",
+        "orchestra/testbench": "3.5.*|3.6.*|3.7.*|3.8.*|^4.0|^5.0",
+        "php-coveralls/php-coveralls": "^2.2",
+        "phpstan/phpstan": "^0.12.10",
+        "phpunit/phpunit": "^8.0",
+        "squizlabs/php_codesniffer": "^3.0"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Ngmy\\LaravelMysqlDumper\\MysqlDumperServiceProvider"
+            ]
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Ngmy\\LaravelMysqlDumper\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Ngmy\\LaravelMysqlDumper\\Tests\\": "tests/"
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "scripts": {
+        "test": [
+            "@php vendor/bin/phpunit --colors=always"
+        ],
+        "lint": [
+            "@php vendor/bin/phpcs --colors"
+        ],
+        "findbug": [
+            "@php vendor/bin/phpstan analyse --ansi"
+        ]
+    }
+}
