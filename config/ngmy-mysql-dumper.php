@@ -35,7 +35,7 @@ return [
         'all' => [
             'connection' => 'mysql',
             'result_file' => \database_path('all.sql'),
-            'imortable_with_laravel' => false,
+            'importable_with_laravel' => false,
             'dump_options' => [
                 'exclude-tables' => [
                     'migrations',
@@ -46,7 +46,7 @@ return [
         'data' => [
             'connection' => 'mysql',
             'result_file' => \database_path('data.sql'),
-            'imortable_with_laravel' => false,
+            'importable_with_laravel' => false,
             'dump_options' => [
                 'exclude-tables' => [
                     'migrations',
@@ -59,7 +59,7 @@ return [
         'schema' => [
             'connection' => 'mysql',
             'result_file' => \database_path('schema.sql'),
-            'imortable_with_laravel' => false,
+            'importable_with_laravel' => false,
             'dump_options' => [
                 'exclude-tables' => [
                     'migrations',
