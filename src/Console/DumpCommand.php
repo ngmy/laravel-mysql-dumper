@@ -90,13 +90,8 @@ class DumpCommand extends Command
         $dump->start($resultFile);
 
         if ($importableWithLaravel) {
-            // HACK Remove version check comment and DELIMITER because DB::unprepared() doesn't understand
+            // HACK Remove the DELIMITER command because the DB::unprepared method doesn't understand
             exec('sed -i -E "
-                s|/\*!\d{5} ([^\*]+)\*/|\1|g;
-                s|\*/$||g;
-                s|\*/\s*(;?;?)$|\1|g;
-                s|/\*!\d{5} ||g;
-                s|/\*!\d{5} ||g;
                 s|DELIMITER ;;$||g;
                 s|DELIMITER ;$||g;
                 s|;;|;|g;
