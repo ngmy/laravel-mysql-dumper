@@ -51,20 +51,17 @@ class DumpCommand extends Command
      */
     public function handle(): void
     {
-        $setting = $this->option('setting');
-        if (\is_null($setting)) {
-            $default = $this->config->get('ngmy-mysql-dumper.default');
-            $setting = $this->config->get('ngmy-mysql-dumper.settings.' . $default);
-        }
-        $this->dump($setting);
+        $settingName = $this->option('setting') ?? $this->config->get('ngmy-mysql-dumper.default');
+        $this->dump($settingName);
     }
 
     /**
-     * @param array<string, mixed> $setting
+     * @param string $settingName
      * @return void
      */
-    public function dump(array $setting): void
+    public function dump(string $settingName): void
     {
+        $setting = $this->config->get('ngmy-mysql-dumper.settings.' . $settingName);
         $connectionName = $setting['connection'] ?? $this->config->get('database.default');
         $dumpOptions = $setting['dump_options'] ?? [];
         $resultFile = $setting['result_file'] ?? \database_path('dump.sql');
