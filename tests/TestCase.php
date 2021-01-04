@@ -56,11 +56,11 @@ class TestCase extends OrchestraTestCase
         $app->make('config')->set('database.default', 'mysql');
         $app->make('config')->set('database.connections.mysql', [
             'driver' => 'mysql',
-            'host' => '127.0.0.1',
+            'host' => getenv('TEST_DB_HOST'),
             'port' => '3306',
             'database' => 'test',
             'username' => 'root',
-            'password' => '',
+            'password' => getenv('TEST_DB_PASSWORD'),
             'charset' => 'utf8mb4',
         ]);
     }
