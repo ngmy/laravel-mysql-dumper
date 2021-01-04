@@ -23,8 +23,8 @@ Laravel MySQL Dumper has the following features:
 
 Laravel MySQL Dumper has the following requirements:
 
-* PHP >= 7.2
-* Laravel >= 5.5
+* PHP >= 7.3
+* Laravel >= 6.0
 
 ## Installation
 
