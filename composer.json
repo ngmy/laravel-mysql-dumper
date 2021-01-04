@@ -10,17 +10,13 @@
         }
     ],
     "require": {
-        "php": "^7.2",
-        "ifsnop/mysqldump-php": "^2.0",
-        "illuminate/support": "5.5.*|5.6.*|5.7.*|5.8.*|^6.0|^7.0"
+        "php": "^7.3|^8.0",
+        "ifsnop/mysqldump-php": "^2.9",
+        "illuminate/support": "^6.0|^7.0|^8.0"
     },
     "require-dev": {
-        "nunomaduro/larastan": "^0.5.4",
-        "orchestra/testbench": "3.5.*|3.6.*|3.7.*|3.8.*|^4.0|^5.0",
-        "php-coveralls/php-coveralls": "^2.2",
-        "phpstan/phpstan": "^0.12.10",
-        "phpunit/phpunit": "^8.0",
-        "squizlabs/php_codesniffer": "^3.0"
+        "nunomaduro/larastan": "0.6.11",
+        "orchestra/testbench": "4.13.0|5.12.1|6.7.2"
     },
     "extra": {
         "laravel": {
@@ -46,13 +42,13 @@
     "prefer-stable": true,
     "scripts": {
         "test": [
-            "@php vendor/bin/phpunit --colors=always"
+            "@php tools/phpunit --colors=always"
         ],
         "lint": [
-            "@php vendor/bin/phpcs --colors"
+            "@php tools/phpcs --colors"
         ],
-        "findbug": [
-            "@php vendor/bin/phpstan analyse --ansi"
+        "findbugs": [
+            "@php tools/phpstan analyse --ansi"
         ]
     }
 }
