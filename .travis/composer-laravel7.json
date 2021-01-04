@@ -1,0 +1,54 @@
+{
+    "name": "ngmy/laravel-mysql-dumper",
+    "description": "The Laravel package that provides the Artisan command to execute mysqldump.",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Yuta Nagamiya",
+            "email": "y.nagamiya@gmail.com"
+        }
+    ],
+    "require": {
+        "php": "^7.3|^8.0",
+        "ifsnop/mysqldump-php": "^2.9",
+        "illuminate/support": "^7.0"
+    },
+    "require-dev": {
+        "nunomaduro/larastan": "0.6.11",
+        "orchestra/testbench": "5.12.1"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Ngmy\\LaravelMysqlDumper\\MysqlDumperServiceProvider"
+            ]
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Ngmy\\LaravelMysqlDumper\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Ngmy\\LaravelMysqlDumper\\Tests\\": "tests/"
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "scripts": {
+        "test": [
+            "@php tools/phpunit --colors=always"
+        ],
+        "lint": [
+            "@php tools/phpcs --colors"
+        ],
+        "findbugs": [
+            "@php tools/phpstan analyse --ansi"
+        ]
+    }
+}
