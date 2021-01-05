@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Ngmy\LaravelMysqlDumper\Tests\Console;
 
-use Illuminate\Testing\PendingCommand;
 use Ngmy\LaravelMysqlDumper\Tests\TestCase;
 
 class DumpCommandTest extends TestCase
@@ -22,7 +21,7 @@ class DumpCommandTest extends TestCase
 
         $command = $this->artisan('mysql-dumper:dump');
 
-        assert($command instanceof PendingCommand);
+        assert(!is_int($command));
 
         $command->run();
 

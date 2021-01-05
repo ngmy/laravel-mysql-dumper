@@ -1,8 +1,11 @@
+/.laradock/data
+/build/
+/tools/
+/vendor/
+.envrc.local
 .php_cs
 .php_cs.cache
 .phpunit.result.cache
-/build/
-/vendor/
 phpcs.xml
 phpstan.neon
 phpunit.xml

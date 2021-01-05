@@ -1,27 +1,143 @@
 language: php
 
-php:
-  - 7.2
-  - 7.3
-  - 7.4
+env:
+  global:
+    - TEST_DB_HOST=127.0.0.1
+    - TEST_DB_PASSWORD=
+
+matrix:
+  fast_finish: true
+  include:
+    # Build against PHP and dependencies used in my development environment
+    - php: 7.4
+      env:
+        - DEPS=current
+
+    # Build against PHP 7.3
+    - php: 7.3
+      env:
+        - LARAVEL=6
+        - DEPS=highest
+    - php: 7.3
+      env:
+        - LARAVEL=6
+        - DEPS=lowest
+    - php: 7.3
+      env:
+        - LARAVEL=7
+        - DEPS=highest
+    - php: 7.3
+      env:
+        - LARAVEL=7
+        - DEPS=lowest
+    - php: 7.3
+      env:
+        - LARAVEL=8
+        - DEPS=highest
+    - php: 7.3
+      env:
+        - LARAVEL=8
+        - DEPS=lowest
+
+    # Build against PHP 7.4
+    - php: 7.4
+      env:
+        - LARAVEL=6
+        - DEPS=highest
+    - php: 7.4
+      env:
+        - LARAVEL=6
+        - DEPS=lowest
+    - php: 7.4
+      env:
+        - LARAVEL=7
+        - DEPS=highest
+    - php: 7.4
+      env:
+        - LARAVEL=7
+        - DEPS=lowest
+    - php: 7.4
+      env:
+        - LARAVEL=8
+        - DEPS=highest
+    - php: 7.4
+      env:
+        - LARAVEL=8
+        - DEPS=lowest
+
+    # Build against PHP 8.0
+    - php: 8.0
+      env:
+        - LARAVEL=6
+        - DEPS=highest
+    - php: 8.0
+      env:
+        - LARAVEL=6
+        - DEPS=lowest
+    - php: 8.0
+      env:
+        - LARAVEL=7
+        - DEPS=highest
+    - php: 8.0
+      env:
+        - LARAVEL=7
+        - DEPS=lowest
+    - php: 8.0
+      env:
+        - LARAVEL=8
+        - DEPS=highest
+    - php: 8.0
+      env:
+        - LARAVEL=8
+        - DEPS=lowest
 
 services:
   - mysql
 
 before_install:
   - composer self-update
+  - travis_retry curl -fsSL https://phar.io/releases/phive.phar -o /tmp/phive.phar
+  - travis_retry curl -fsSL https://phar.io/releases/phive.phar.asc -o /tmp/phive.phar.asc
+  - travis_retry gpg --keyserver pool.sks-keyservers.net --recv-keys 0x9D8A98B29B2D5D79
+  - gpg --verify /tmp/phive.phar.asc /tmp/phive.phar
+  - chmod +x /tmp/phive.phar
+  - sudo mv /tmp/phive.phar /usr/local/bin/phive
+  - echo 'xdebug.mode = "coverage"' >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
 
 install:
-  - composer install --dev --no-interaction
+  - |
+    if [[ "${LARAVEL}" == '6' ]]; then
+      export COMPOSER=.travis/composer-laravel6.json
+    fi
+  - |
+    if [[ "${LARAVEL}" == '7' ]]; then
+      export COMPOSER=.travis/composer-laravel7.json
+    fi
+  - |
+    if [[ "${LARAVEL}" == '8' ]]; then
+      export COMPOSER=.travis/composer-laravel8.json
+    fi
+  - |
+    if [[ "${DEPS}" == 'current' ]]; then
+      composer install --no-interaction
+    fi
+  - |
+    if [[ "${DEPS}" == 'highest' ]]; then
+      composer update --no-interaction
+    fi
+  - |
+    if [[ "${DEPS}" == 'lowest' ]]; then
+      composer update --no-interaction --prefer-lowest --prefer-stable
+    fi
+  - travis_retry phive --no-progress install --trust-gpg-keys E82B2FB314E9906E,31C7E470E2138192,CF1A108D0E7AE720,4AA394086372C20A
 
 before_script:
-  - mysql -u root -e "create database test"
-  - mkdir -p build/logs
+  - mysql -u root -e 'create database test'
 
 script:
   - composer lint
-  - composer findbug
+  - composer findbugs
   - composer test
 
 after_success:
-  - travis_retry php vendor/bin/php-coveralls
+  - travis_retry php tools/php-coveralls
