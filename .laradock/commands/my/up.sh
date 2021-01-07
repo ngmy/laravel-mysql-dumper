@@ -9,8 +9,10 @@ handle() {
   docker-compose up -d --build mysql workspace
   docker-compose exec -u laradock workspace composer install
   cp ../phpunit.xml.dist ../phpunit.xml
-  sed -i 's/name="TEST_DB_HOST" value=""/name="TEST_DB_HOST" value="mysql"/g' ../phpunit.xml
-  sed -i 's/name="TEST_DB_PASSWORD" value=""/name="TEST_DB_PASSWORD" value="root"/g' ../phpunit.xml
+  sed -i 's/name="DB_HOST" value=""/name="DB_HOST" value="mysql"/g' ../phpunit.xml
+  sed -i 's/name="DB_DATABASE" value=""/name="DB_DATABASE" value="test"/g' ../phpunit.xml
+  sed -i 's/name="DB_USERNAME" value=""/name="DB_USERNAME" value="root"/g' ../phpunit.xml
+  sed -i 's/name="DB_PASSWORD" value=""/name="DB_PASSWORD" value="root"/g' ../phpunit.xml
   if ! docker-compose exec workspace bash -c 'test -f /usr/local/bin/phive'; then
     docker-compose exec workspace curl -fsSL https://phar.io/releases/phive.phar -o /tmp/phive.phar
     docker-compose exec workspace curl -fsSL https://phar.io/releases/phive.phar.asc -o /tmp/phive.phar.asc
