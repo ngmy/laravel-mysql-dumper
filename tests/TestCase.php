@@ -52,17 +52,7 @@ class TestCase extends OrchestraTestCase
      */
     protected function getEnvironmentSetUp($app): void
     {
-        // Setup default database to use mysql
         $app->make('config')->set('database.default', 'mysql');
-        $app->make('config')->set('database.connections.mysql', [
-            'driver' => 'mysql',
-            'host' => getenv('TEST_DB_HOST'),
-            'port' => '3306',
-            'database' => 'test',
-            'username' => 'root',
-            'password' => getenv('TEST_DB_PASSWORD'),
-            'charset' => 'utf8mb4',
-        ]);
     }
 
     /**

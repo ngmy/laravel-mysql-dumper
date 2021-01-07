@@ -29,7 +29,9 @@
         </report>
     </coverage>
     <php>
-        <env name="TEST_DB_HOST" value=""/>
-        <env name="TEST_DB_PASSWORD" value=""/>
+        <env name="DB_HOST" value=""/>
+        <env name="DB_DATABASE" value=""/>
+        <env name="DB_USERNAME" value=""/>
+        <env name="DB_PASSWORD" value=""/>
     </php>
 </phpunit>
