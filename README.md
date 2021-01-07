@@ -5,7 +5,7 @@
 [![Latest Unstable Version](https://poser.pugx.org/ngmy/laravel-mysql-dumper/v/unstable)](https://packagist.org/packages/ngmy/laravel-mysql-dumper)
 [![License](https://poser.pugx.org/ngmy/laravel-mysql-dumper/license)](https://packagist.org/packages/ngmy/laravel-mysql-dumper)
 [![composer.lock](https://poser.pugx.org/ngmy/laravel-mysql-dumper/composerlock)](https://packagist.org/packages/ngmy/laravel-mysql-dumper)<br>
-[![Build Status](https://travis-ci.org/ngmy/laravel-mysql-dumper.svg?branch=master)](https://travis-ci.org/ngmy/laravel-mysql-dumper)
+[![PHP CI](https://github.com/ngmy/laravel-mysql-dumper/workflows/PHP%20CI/badge.svg)](https://github.com/ngmy/laravel-mysql-dumper/actions?query=workflow%3A%22PHP+CI%22)
 [![Coverage Status](https://coveralls.io/repos/github/ngmy/laravel-mysql-dumper/badge.svg?branch=master)](https://coveralls.io/github/ngmy/laravel-mysql-dumper?branch=master)
 
 The Laravel package that provides the Artisan command to execute `mysqldump`.
